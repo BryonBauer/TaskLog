@@ -28,10 +28,7 @@ namespace TaskLog.Models
         [Display(Name="Estimated Time")]
         public int EstimatedTime { get; set; }
 
-        public User TaskCreator { get; set; }
-
-        public int ProjectID { get; set; }
-
+        public int? ParentTaskId { get; set; }
         public Task ParentTask { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;

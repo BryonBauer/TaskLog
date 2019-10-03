@@ -34,11 +34,12 @@ namespace TaskLog.Models
 
         public bool hasTask { get; set; }
 
+        public int? ProjectCreatorUserId { get; set; }
         public User ProjectCreator { get; set; }
 
-        public int UserId { get; set; }
+        public List<Project> UsersProjects { get; set; }
 
-        public ICollection<Task> Tasks { get; set; }
+        public List<Task> Tasks { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;

@@ -35,7 +35,7 @@ namespace TaskLog.Migrations
                     DueDate = table.Column<DateTime>(nullable: false),
                     EstimatedTime = table.Column<int>(nullable: false),
                     hasTask = table.Column<bool>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
+                    ProjectCreatorUserId = table.Column<int>(nullable: true),
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     UpdatedAt = table.Column<DateTime>(nullable: false)
                 },
@@ -43,11 +43,11 @@ namespace TaskLog.Migrations
                 {
                     table.PrimaryKey("PK_Projects", x => x.ProjectID);
                     table.ForeignKey(
-                        name: "FK_Projects_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Projects_Users_ProjectCreatorUserId",
+                        column: x => x.ProjectCreatorUserId,
                         principalTable: "Users",
                         principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -60,8 +60,7 @@ namespace TaskLog.Migrations
                     TaskDescription = table.Column<string>(nullable: false),
                     DueDate = table.Column<DateTime>(nullable: false),
                     EstimatedTime = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
-                    ProjectID = table.Column<int>(nullable: false),
+                    ParentProjectId = table.Column<int>(nullable: true),
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     UpdatedAt = table.Column<DateTime>(nullable: false)
                 },
@@ -69,17 +68,11 @@ namespace TaskLog.Migrations
                 {
                     table.PrimaryKey("PK_Tasks", x => x.TaskID);
                     table.ForeignKey(
-                        name: "FK_Tasks_Projects_ProjectID",
-                        column: x => x.ProjectID,
+                        name: "FK_Tasks_Projects_ParentProjectId",
+                        column: x => x.ParentProjectId,
                         principalTable: "Projects",
                         principalColumn: "ProjectID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Tasks_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -92,9 +85,7 @@ namespace TaskLog.Migrations
                     SubTaskDescription = table.Column<string>(nullable: false),
                     DueDate = table.Column<DateTime>(nullable: false),
                     EstimatedTime = table.Column<int>(nullable: false),
-                    TaskCreatorUserId = table.Column<int>(nullable: true),
-                    ProjectID = table.Column<int>(nullable: false),
-                    ParentTaskTaskID = table.Column<int>(nullable: true),
+                    ParentTaskId = table.Column<int>(nullable: true),
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     UpdatedAt = table.Column<DateTime>(nullable: false)
                 },
@@ -102,43 +93,27 @@ namespace TaskLog.Migrations
                 {
                     table.PrimaryKey("PK_SubTasks", x => x.SubTaskID);
                     table.ForeignKey(
-                        name: "FK_SubTasks_Tasks_ParentTaskTaskID",
-                        column: x => x.ParentTaskTaskID,
+                        name: "FK_SubTasks_Tasks_ParentTaskId",
+                        column: x => x.ParentTaskId,
                         principalTable: "Tasks",
                         principalColumn: "TaskID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_SubTasks_Users_TaskCreatorUserId",
-                        column: x => x.TaskCreatorUserId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Projects_UserId",
+                name: "IX_Projects_ProjectCreatorUserId",
                 table: "Projects",
-                column: "UserId");
+                column: "ProjectCreatorUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SubTasks_ParentTaskTaskID",
+                name: "IX_SubTasks_ParentTaskId",
                 table: "SubTasks",
-                column: "ParentTaskTaskID");
+                column: "ParentTaskId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SubTasks_TaskCreatorUserId",
-                table: "SubTasks",
-                column: "TaskCreatorUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tasks_ProjectID",
+                name: "IX_Tasks_ParentProjectId",
                 table: "Tasks",
-                column: "ProjectID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tasks_UserId",
-                table: "Tasks",
-                column: "UserId");
+                column: "ParentProjectId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

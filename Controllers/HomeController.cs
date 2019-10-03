@@ -125,7 +125,7 @@ namespace TaskLog.Controllers
             Console.WriteLine("Checking Model!");
             User loggedUser = dbContext.Users.FirstOrDefault (u => u.UserId == HttpContext.Session.GetInt32 ("logged"));
             newProject.ProjectCreator = loggedUser;
-            newProject.UserId = loggedUser.UserId;
+            newProject.ProjectCreator.UserId = loggedUser.UserId;
             dbContext.Add(newProject);
             dbContext.SaveChanges();
             return RedirectToAction("ViewProject", new { ProjectID = newProject.ProjectID });
@@ -223,13 +223,13 @@ namespace TaskLog.Controllers
     public void PopulateBag() 
     {
         User loggedUser = dbContext.Users.FirstOrDefault (u => u.UserId == HttpContext.Session.GetInt32 ("logged"));
-        List<Project> ProjectWithUsers = dbContext.Projects
-                .Include (g => g.ProjectCreator)
+        List<Project> UserCreatedProjects = dbContext.Projects
+                .Include (u => u.UsersProjects)
                 .ToList ();
-        ViewBag.UsersProjects = ProjectWithUsers;
+        ViewBag.UsersProjects = UserCreatedProjects;
         ViewBag.Email = loggedUser.Email;
         ViewBag.UserId = loggedUser.UserId;
-        ViewBag.Projects = ProjectWithUsers;  
+        ViewBag.Projects = UserCreatedProjects;  
         ViewBag.LoggedUser = loggedUser;
     }
 

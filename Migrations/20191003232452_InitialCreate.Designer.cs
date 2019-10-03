@@ -10,8 +10,8 @@ using TaskLog.Models;
 namespace TaskLog.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20191002201802_NewMigration")]
-    partial class NewMigration
+    [Migration("20191003232452_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,6 +33,8 @@ namespace TaskLog.Migrations
 
                     b.Property<int>("EstimatedTime");
 
+                    b.Property<int?>("ProjectCreatorUserId");
+
                     b.Property<string>("ProjectDescription")
                         .IsRequired();
 
@@ -41,13 +43,11 @@ namespace TaskLog.Migrations
 
                     b.Property<DateTime>("UpdatedAt");
 
-                    b.Property<int>("UserId");
-
                     b.Property<bool>("hasTask");
 
                     b.HasKey("ProjectID");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ProjectCreatorUserId");
 
                     b.ToTable("Projects");
                 });
@@ -64,9 +64,7 @@ namespace TaskLog.Migrations
 
                     b.Property<int>("EstimatedTime");
 
-                    b.Property<int?>("ParentTaskTaskID");
-
-                    b.Property<int>("ProjectID");
+                    b.Property<int?>("ParentTaskId");
 
                     b.Property<string>("SubTaskDescription")
                         .IsRequired();
@@ -74,15 +72,11 @@ namespace TaskLog.Migrations
                     b.Property<string>("SubTaskName")
                         .IsRequired();
 
-                    b.Property<int?>("TaskCreatorUserId");
-
                     b.Property<DateTime>("UpdatedAt");
 
                     b.HasKey("SubTaskID");
 
-                    b.HasIndex("ParentTaskTaskID");
-
-                    b.HasIndex("TaskCreatorUserId");
+                    b.HasIndex("ParentTaskId");
 
                     b.ToTable("SubTasks");
                 });
@@ -99,7 +93,7 @@ namespace TaskLog.Migrations
 
                     b.Property<int>("EstimatedTime");
 
-                    b.Property<int>("ProjectID");
+                    b.Property<int?>("ParentProjectId");
 
                     b.Property<string>("TaskDescription")
                         .IsRequired();
@@ -109,13 +103,9 @@ namespace TaskLog.Migrations
 
                     b.Property<DateTime>("UpdatedAt");
 
-                    b.Property<int>("UserId");
-
                     b.HasKey("TaskID");
 
-                    b.HasIndex("ProjectID");
-
-                    b.HasIndex("UserId");
+                    b.HasIndex("ParentProjectId");
 
                     b.ToTable("Tasks");
                 });
@@ -144,34 +134,22 @@ namespace TaskLog.Migrations
             modelBuilder.Entity("TaskLog.Models.Project", b =>
                 {
                     b.HasOne("TaskLog.Models.User", "ProjectCreator")
-                        .WithMany("UsersCreatedProjects")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany("UserProjects")
+                        .HasForeignKey("ProjectCreatorUserId");
                 });
 
             modelBuilder.Entity("TaskLog.Models.SubTask", b =>
                 {
                     b.HasOne("TaskLog.Models.Task", "ParentTask")
                         .WithMany("SubTasks")
-                        .HasForeignKey("ParentTaskTaskID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("TaskLog.Models.User", "TaskCreator")
-                        .WithMany()
-                        .HasForeignKey("TaskCreatorUserId");
+                        .HasForeignKey("ParentTaskId");
                 });
 
             modelBuilder.Entity("TaskLog.Models.Task", b =>
                 {
                     b.HasOne("TaskLog.Models.Project", "ParentProject")
                         .WithMany("Tasks")
-                        .HasForeignKey("ProjectID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("TaskLog.Models.User", "TaskCreator")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ParentProjectId");
                 });
 #pragma warning restore 612, 618
         }

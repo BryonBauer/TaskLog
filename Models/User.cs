@@ -32,6 +32,8 @@ namespace TaskLog.Models
         [Display(Name="Confirm Password")]
         public string Confirm {get;set;}
 
-        public List<Project> UsersCreatedProjects{ get; set; }
+        public List<Project> UserProjects{ get; set; }
+        // public List<Task> UserTasks{ get; set; }
+        // public List<SubTask> UserSubTasks{ get; set; }
     }
 }

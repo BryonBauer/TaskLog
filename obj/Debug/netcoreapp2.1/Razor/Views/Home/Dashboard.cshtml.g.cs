@@ -62,7 +62,7 @@ using TaskLog.Models;
             WriteLiteral("\n<h1>Projects!</h1>\n<br>\n");
             EndContext();
             BeginContext(77, 52, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "09939e3bb5f34b4d95931cf0323dba73", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e5129fe2b023480abd08b857568c3beb", async() => {
                 BeginContext(119, 6, true);
                 WriteLiteral("Logout");
                 EndContext();
@@ -149,7 +149,7 @@ using TaskLog.Models;
             WriteLiteral("            <td class=\"text-left\">");
             EndContext();
             BeginContext(872, 119, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "844b35598d6b4e53b3afed46bfec6e21", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4bdebc21920b4d83bd050b9eb5c1c97f", async() => {
                 BeginContext(981, 6, true);
                 WriteLiteral("Delete");
                 EndContext();
@@ -186,7 +186,7 @@ using TaskLog.Models;
             WriteLiteral("\n                ");
             EndContext();
             BeginContext(1008, 113, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "170064de9cf04683b84d51c7a6e6398a", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6f7984a39f5c40e1a98d41807656bcb9", async() => {
                 BeginContext(1113, 4, true);
                 WriteLiteral("View");
                 EndContext();
@@ -239,7 +239,7 @@ using TaskLog.Models;
             WriteLiteral("    </tbody>\n\n</table>\n\n<td class=\"text-left\">");
             EndContext();
             BeginContext(1224, 86, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "11f9ad2e2dad4609a85f4fd5789d4cd1", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cf9334f26a0c4beea77b1dd571b3d782", async() => {
                 BeginContext(1296, 10, true);
                 WriteLiteral("Add a Task");
                 EndContext();
