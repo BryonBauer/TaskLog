@@ -1,0 +1,26 @@
+﻿@model User
+
+<h1>Register</h1>
+
+<form asp-action="register" class="Container" method="POST">
+    <span class="text-center">@Html.Raw(TempData["alertMessage"])</span>
+    <div class="form-group">
+        <span asp-validation-for="Email"></span>
+        <label asp-for="Email"></label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            placeholder="Enter email" asp-for="Email">
+    </div>
+    <div class="form-group">
+        <span asp-validation-for="Password"></span>
+        <label asp-for="Password"></label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" asp-for="Password">
+    </div>
+    <div class="form-group">
+        <span asp-validation-for="Confirm"></span>
+        <label asp-for="Confirm"></label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" asp-for="Confirm">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<small><a href="login">Already have an account?</a></small>

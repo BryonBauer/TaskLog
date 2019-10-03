@@ -1,0 +1,46 @@
+@using TaskLog.Models
+@model TaskLog.Models.Project
+
+<h1>Add a Project!</h1>
+
+<p>______________________________________________________________________________________________________________________________________________________________
+</p>
+<br>
+
+<br>
+<form asp-action="ProcessProject" method="POST">
+    <div>
+        <span class="text-center">@Html.Raw(TempData["alertMessage"])</span>
+        <span asp-validation-for="ProjectName"></span>
+        <label asp-for="ProjectName"></label>
+        <input asp-for="ProjectName" class="form-group form-control">
+    </div>
+
+    <div>
+        <span class="text-center">@Html.Raw(TempData["alertMessage"])</span>
+        <span asp-validation-for="ProjectDescription"></span>
+        <label asp-for="ProjectDescription"></label>
+        <textarea type="text" asp-for="ProjectDescription" class="form-group form-control"></textarea>
+    </div>
+
+    <div>
+        <span class="text-center">@Html.Raw(TempData["alertMessage"])</span>
+        <span asp-validation-for="DueDate"></span>
+        <label asp-for="DueDate"></label>
+        <input type="date" asp-for="DueDate" class="form-group form-control">
+    </div>
+
+    <div>
+        <span class="text-center">@Html.Raw(TempData["alertMessage"])</span>
+        <span asp-validation-for="EstimatedTime"></span>
+        <label asp-for="EstimatedTime"></label>
+        <input type="number" asp-for="EstimatedTime" class="form-group form-control">
+    </div>
+
+    <input type="hidden" value="@ViewBag.UserId">
+
+    <input type="submit" class="btn btn-primary btn-sm" value="Create">
+    <td class="text-left"><a asp-action="Dashboard" role="button" class="btn btn-danger btn-sm">Cancel</a>
+    </td>
+
+</form>

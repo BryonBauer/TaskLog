@@ -1,0 +1,54 @@
+@using TaskLog.Models
+@model TaskLog.Models.Project
+
+<h1>@Model.ProjectName</h1>
+<h2>Due: @Model.DueDate.ToString("d")</h2>
+<h2>Estimated Time: @Model.EstimatedTime hours</h2>
+<h3>Created by: <em>@Model.ProjectCreator.Email</em></h3>
+<p>______________________________________________________________________________________________________________________________________________________________
+</p>
+<br>
+<div class="col-lg-6">
+    <form asp-action="EditProject" method="POST">
+            <div>
+                <span class="text-center">@Html.Raw(TempData["alertMessage"])</span>
+                <span asp-validation-for="ProjectName"></span>
+                <label asp-for="ProjectName"></label>
+                <input asp-for="ProjectName" class="form-group form-control">
+            </div>
+        
+            <div>
+                <span class="text-center">@Html.Raw(TempData["alertMessage"])</span>
+                <span asp-validation-for="ProjectDescription"></span>
+                <label asp-for="ProjectDescription"></label>
+                <textarea type="text" asp-for="ProjectDescription" class="form-group form-control"></textarea>
+            </div>
+        
+            <div>
+                <span class="text-center">@Html.Raw(TempData["alertMessage"])</span>
+                <span asp-validation-for="DueDate"></span>
+                <label asp-for="DueDate"></label>
+                <input type="date" asp-for="DueDate" class="form-group form-control">
+            </div>
+        
+            <div>
+                <span class="text-center">@Html.Raw(TempData["alertMessage"])</span>
+                <span asp-validation-for="EstimatedTime"></span>
+                <label asp-for="EstimatedTime"></label>
+                <input type="number" asp-for="EstimatedTime" class="form-group form-control">
+            </div>
+        
+            <input type="hidden" value="@Model.ProjectID">
+        
+            <input type="submit" class="btn btn-primary btn-sm" value="Update">
+            <td class="text-left"><a asp-action="Dashboard" role="button" class="btn btn-danger btn-sm">Cancel</a>
+            </td>
+        
+    </form>    
+    <input type="hidden" asp-for="@Model.ProjectID"/>    
+</div>
+<div class="col-lg-6">
+    Tasks!
+</div>
+
+

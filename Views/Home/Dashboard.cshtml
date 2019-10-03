@@ -1,0 +1,41 @@
+@using TaskLog.Models
+@model TaskLog.Models.Project
+
+<h1>Projects!</h1>
+<br>
+<a class="text-right" asp-action="Logout">Logout</a>
+
+<p>______________________________________________________________________________________________________________________________________________________________
+</p>
+<br>
+
+<table class="table table-dark table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Project</th>
+            <th scope="col">Due Date</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var t in @ViewBag.Projects){
+        <tr>
+            <td>@t.ProjectID</td>
+            <td>@t.ProjectName</td>
+            <td>@t.ProjectStatus</td>
+            @if(@ViewBag.UserId == @t.UserId)
+            {
+            <td class="text-left"><a asp-action="DeleteProject" role="button" class="btn btn-danger btn-sm" asp-route-projectId="@t.ProjectID">Delete</a>
+                <a asp-action="ViewProject" role="button" class="btn btn-info btn-sm" asp-route-projectId="@t.ProjectID">View</a>
+            </td>
+            }
+        </tr>
+        }
+    </tbody>
+
+</table>
+
+<td class="text-left"><a asp-action="NewProject" role="button" class="btn btn-primary btn-sm">Add a Task</a>
+</td>
