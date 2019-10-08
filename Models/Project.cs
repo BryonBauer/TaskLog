@@ -26,20 +26,21 @@ namespace TaskLog.Models
 
         [Required(ErrorMessage="Project Status is required")]
         [Display(Name="Project Status")]
-        public string ProjectStatus = "New";
+        public string ProjectStatus { get; set; }
 
         [Required(ErrorMessage="Estimated Time is required")]
         [Display(Name="Estimated Time")]   
         public int EstimatedTime { get; set; }
 
+        // Simple way of checking for tasks
         public bool hasTask { get; set; }
 
+        // User information
         public int? ProjectCreatorUserId { get; set; }
         public User ProjectCreator { get; set; }
 
-        public List<Project> UsersProjects { get; set; }
-
-        public List<Task> Tasks { get; set; }
+        // Project's tasks
+        public List<Task> ProjectTasks = new List<Task> ();
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;

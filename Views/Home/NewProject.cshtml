@@ -1,6 +1,10 @@
 @using TaskLog.Models
 @model TaskLog.Models.Project
 
+<link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-fallback-test-class="sr-only"
+asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+
 <h1>Add a Project!</h1>
 
 <p>______________________________________________________________________________________________________________________________________________________________
@@ -35,6 +39,18 @@
         <span asp-validation-for="EstimatedTime"></span>
         <label asp-for="EstimatedTime"></label>
         <input type="number" asp-for="EstimatedTime" class="form-group form-control">
+    </div>
+
+    <div>
+        <span class="text-center">@Html.Raw(TempData["alertMessage"])</span>
+        <span asp-validation-for="ProjectStatus"></span>
+        <label asp-for="ProjectStatus"></label>
+        <select name="ProjectStatus" id="">
+            <option value="New">New</option>
+            <option value="Done">Done</option>
+            <option value="NeedHelp">Need Help</option>
+            <option value="DeleteMe">DELETE ME</option>
+        </select>
     </div>
 
     <input type="hidden" value="@ViewBag.UserId">

@@ -1,4 +1,17 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿$(function() {
+    alert("OK!");
+    var showMenu = false;
 
-// Write your JavaScript code.
+    $("#menuIcon").click(function () { 
+        if(!showMenu){
+            $("#sideMenu").toggle();
+            $(".card-container").css("margin-left", "15%");
+            showMenu = true;
+        }
+        else{
+            $("#sideMenu").toggle();
+            $(".card-container").css("margin-left", "0%");
+            showMenu = false;
+        }
+    });
+});

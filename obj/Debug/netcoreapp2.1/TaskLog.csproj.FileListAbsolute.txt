@@ -29,3 +29,8 @@
 /Users/bryonbauer/Projects/TaskLog/obj/Debug/netcoreapp2.1/Razor/Views/Home/NewProject.cshtml.g.cs
 /Users/bryonbauer/Projects/TaskLog/obj/Debug/netcoreapp2.1/Razor/Views/Home/ViewProject.cshtml.g.cs
 /Users/bryonbauer/Projects/TaskLog/obj/Debug/netcoreapp2.1/Razor/Views/Home/EditProject.cshtml.g.cs
+/Users/bryonbauer/Projects/TaskLog/obj/Debug/netcoreapp2.1/Razor/Views/Home/NewTask.cshtml.g.cs
+/Users/bryonbauer/Projects/TaskLog/obj/Debug/netcoreapp2.1/Razor/Views/Home/EditTask.cshtml.g.cs
+/Users/bryonbauer/Projects/TaskLog/obj/Debug/netcoreapp2.1/Razor/Views/Home/NewSubTask.cshtml.g.cs
+/Users/bryonbauer/Projects/TaskLog/obj/Debug/netcoreapp2.1/Razor/Views/Home/ViewTask.cshtml.g.cs
+/Users/bryonbauer/Projects/TaskLog/obj/Debug/netcoreapp2.1/Razor/Views/Home/ViewSubTask.cshtml.g.cs

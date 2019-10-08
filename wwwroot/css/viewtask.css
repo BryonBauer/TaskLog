@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+#editBtn {
+    /* border: 1px solid red; */
+    background-color: transparent;
+    border: none;
+    margin: 0 1%;
+}
+
+#delBtn {
+    /* border: 1px solid red; */
+    background-color: transparent;
+    border: none;
+}
+
+.card-lg{
+    padding: 5%;
+    background-color: #ffff88;
+}
+
+.card-subtask{
+    height: 5%;
+    width: 80%;
+    margin-left: 5%;
+}
+
+.task-task-container{
+    display: flex;
+}
+
+.hr {
+    margin: 2% 0;
+    width: 95%;
+    height: 2px;
+    background-color: gray;
+}

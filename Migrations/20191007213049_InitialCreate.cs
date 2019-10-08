@@ -33,6 +33,7 @@ namespace TaskLog.Migrations
                     ProjectName = table.Column<string>(nullable: false),
                     ProjectDescription = table.Column<string>(nullable: false),
                     DueDate = table.Column<DateTime>(nullable: false),
+                    ProjectStatus = table.Column<string>(nullable: false),
                     EstimatedTime = table.Column<int>(nullable: false),
                     hasTask = table.Column<bool>(nullable: false),
                     ProjectCreatorUserId = table.Column<int>(nullable: true),
@@ -47,7 +48,7 @@ namespace TaskLog.Migrations
                         column: x => x.ProjectCreatorUserId,
                         principalTable: "Users",
                         principalColumn: "UserId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -60,7 +61,9 @@ namespace TaskLog.Migrations
                     TaskDescription = table.Column<string>(nullable: false),
                     DueDate = table.Column<DateTime>(nullable: false),
                     EstimatedTime = table.Column<int>(nullable: false),
+                    hasSubTasks = table.Column<bool>(nullable: false),
                     ParentProjectId = table.Column<int>(nullable: true),
+                    TaskCreatorUserId = table.Column<int>(nullable: true),
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     UpdatedAt = table.Column<DateTime>(nullable: false)
                 },
@@ -73,6 +76,12 @@ namespace TaskLog.Migrations
                         principalTable: "Projects",
                         principalColumn: "ProjectID",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Tasks_Users_TaskCreatorUserId",
+                        column: x => x.TaskCreatorUserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -85,7 +94,9 @@ namespace TaskLog.Migrations
                     SubTaskDescription = table.Column<string>(nullable: false),
                     DueDate = table.Column<DateTime>(nullable: false),
                     EstimatedTime = table.Column<int>(nullable: false),
+                    hasInnerSubTasks = table.Column<bool>(nullable: false),
                     ParentTaskId = table.Column<int>(nullable: true),
+                    SubTaskCreatorUserId = table.Column<int>(nullable: true),
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     UpdatedAt = table.Column<DateTime>(nullable: false)
                 },
@@ -97,6 +108,12 @@ namespace TaskLog.Migrations
                         column: x => x.ParentTaskId,
                         principalTable: "Tasks",
                         principalColumn: "TaskID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SubTasks_Users_SubTaskCreatorUserId",
+                        column: x => x.SubTaskCreatorUserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -106,14 +123,30 @@ namespace TaskLog.Migrations
                 column: "ProjectCreatorUserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Projects_ProjectID",
+                table: "Projects",
+                column: "ProjectID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SubTasks_ParentTaskId",
                 table: "SubTasks",
                 column: "ParentTaskId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_SubTasks_SubTaskCreatorUserId",
+                table: "SubTasks",
+                column: "SubTaskCreatorUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Tasks_ParentProjectId",
                 table: "Tasks",
                 column: "ParentProjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tasks_TaskCreatorUserId",
+                table: "Tasks",
+                column: "TaskCreatorUserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -1,7 +1,8 @@
 @using TaskLog.Models
-@model TaskLog.Models.Project
+@model TaskLog.Models.SubTask
 
 <link rel="stylesheet" href="/wwwroot/css/dashboard.css">
+<link rel="stylesheet" href="/wwwroot/css/viewtask.css">
 
 <ul id="navBar">
 
@@ -18,24 +19,24 @@
     <li id="loggedUser">Welcome, Bryon!</li>
 </ul>
 
-<div class="row project-task-container">
+<div class="row task-task-container">
     <div class="col-lg">
-        <form asp-action="EditProject" method="POST">
+        <form asp-action="EditSubTask" method="POST">
             <div class="card-lg">
-                <h1>@Model.ProjectName</h1>
+                <h1>@Model.SubTaskName</h1>
                 <h2>Due: @Model.DueDate.ToString("d")</h2>
-                <h3>Created by: <em>@Model.ProjectCreator.Email</em></h3>
+                <h3>Created by: <em>@Model.SubTaskCreator.Email</em></h3>
                 <div class="hr"></div>
                 <span class="text-center">@Html.Raw(TempData["alertMessage"])</span>
-                <span asp-validation-for="ProjectName"></span>
-                <label asp-for="ProjectName"></label>
-                <input asp-for="ProjectName" class="form-group form-control">
+                <span asp-validation-for="SubTaskName"></span>
+                <label asp-for="SubTaskName"></label>
+                <input asp-for="SubTaskName" class="form-group form-control">
 
                 <div>
                     <span class="text-center">@Html.Raw(TempData["alertMessage"])</span>
-                    <span asp-validation-for="ProjectDescription"></span>
-                    <label asp-for="ProjectDescription"></label>
-                    <textarea type="text" asp-for="ProjectDescription" class="form-group form-control"></textarea>
+                    <span asp-validation-for="SubTaskDescription"></span>
+                    <label asp-for="SubTaskDescription"></label>
+                    <textarea type="text" asp-for="SubTaskDescription" class="form-group form-control"></textarea>
                 </div>
 
                 <div>
@@ -52,19 +53,7 @@
                     <input type="number" asp-for="EstimatedTime" class="form-group form-control">
                 </div>
 
-                <div>
-                    <span class="text-center">@Html.Raw(TempData["alertMessage"])</span>
-                    <span asp-validation-for="ProjectStatus"></span>
-                    <label asp-for="ProjectStatus"></label>
-                    <select class="form-group form-control" name="ProjectStatus" id="">
-                        <option value="New">New</option>
-                        <option value="Done">Done</option>
-                        <option value="NeedHelp">Need Help</option>
-                        <option value="DeleteMe">DELETE ME</option>
-                    </select>
-                </div>
-
-                <input type="hidden" value="@Model.ProjectID">
+                <input type="hidden" value="@Model.SubTaskID">
 
                 <input type="submit" class="btn btn-primary btn-sm" value="Update">
                 <td class="text-left"><a asp-action="Dashboard" role="button" class="btn btn-danger btn-sm">Cancel</a>
@@ -74,21 +63,20 @@
 
 
         </form>
-        <input type="hidden" asp-for="@Model.ProjectID" />
+        <input type="hidden" asp-for="@Model.SubTaskID" />
     </div>
     <div class="col-lg">
-        <h1 id="mainHeader">Tasks(@ViewBag.Tasks.Count)<a asp-action="NewTask" id="newTaskBtn"><img
+        <h1 id="mainHeader">SubTasks(@ViewBag.SubTasks.Count)<a asp-action="NewSubTask" id="newSubTaskBtn"><img
                     src="https://img.icons8.com/flat_round/24/000000/plus.png"></a> </h1>
-        @foreach(var t in @ViewBag.Tasks){
-        <div class="card-task bg-light">
-            @t.TaskName
-            # of SubTasks - (@ViewBag.SubTasks.Count)
+        @foreach(var s in @ViewBag.SubTasks){
+        <div class="card-subtask bg-light">
+            @s.SubTaskName
             <div class="card-input-group">
-                <a asp-action="ViewTask" id="editBtn" asp-route-taskId="@t.TaskID"><img
+                <a asp-action="ViewSubTask" id="editBtn" asp-route-subTaskId="@s.SubTaskID"><img
                         src="https://img.icons8.com/material-two-tone/24/000000/pencil.png"></a>
-                @if(@ViewBag.UserId == @t.TaskCreatorUserId)
+                @if(@ViewBag.UserId == @s.SubTaskCreatorUserId)
                 {
-                <a asp-action="DeleteTask" id="delBtn" asp-route-taskId="@t.TaskID"><img
+                <a asp-action="DeleteTask" id="delBtn" asp-route-subTaskId="@s.SubTaskID"><img
                         src="https://img.icons8.com/material-rounded/24/000000/delete-trash.png"></a>
                 }
 

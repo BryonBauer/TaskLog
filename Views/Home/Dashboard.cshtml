@@ -1,41 +1,67 @@
 @using TaskLog.Models
 @model TaskLog.Models.Project
 
-<h1>Projects!</h1>
-<br>
-<a class="text-right" asp-action="Logout">Logout</a>
+<link rel="stylesheet" href="/wwwroot/css/dashboard.css">
 
-<p>______________________________________________________________________________________________________________________________________________________________
-</p>
-<br>
+<ul id="navBar">
 
-<table class="table table-dark table-hover">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Project</th>
-            <th scope="col">Due Date</th>
-            <th scope="col">Status</th>
-            <th scope="col">Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach(var t in @ViewBag.Projects){
-        <tr>
-            <td>@t.ProjectID</td>
-            <td>@t.ProjectName</td>
-            <td>@t.ProjectStatus</td>
-            @if(@ViewBag.UserId == @t.UserId)
-            {
-            <td class="text-left"><a asp-action="DeleteProject" role="button" class="btn btn-danger btn-sm" asp-route-projectId="@t.ProjectID">Delete</a>
-                <a asp-action="ViewProject" role="button" class="btn btn-info btn-sm" asp-route-projectId="@t.ProjectID">View</a>
-            </td>
-            }
-        </tr>
-        }
-    </tbody>
+    <h3 id="title">TASK LOG</h3>
 
-</table>
+    <li id="menuIcon"><img src="https://img.icons8.com/material-rounded/32/000000/menu.png"></li>
 
-<td class="text-left"><a asp-action="NewProject" role="button" class="btn btn-primary btn-sm">Add a Task</a>
-</td>
+    <li><a class="active" href="/dashboard">Home</a></li>
+    <li><a href="#news">Link</a></li>
+    <li><a href="#contact">Link</a></li>
+    <li><a href="#about">Link</a></li>
+
+    <li><img id="userIcon" src="https://img.icons8.com/material-rounded/48/000000/user-male-circle.png"></li>
+    <li id="loggedUser">Welcome, Bryon!</li>
+</ul>
+
+<div class="main-container">
+    <div id="sideMenu">
+        <ul>
+            <li>Test</li>
+        </ul>
+    </div>
+    <h1 id="mainHeader">Project Dashboard <a asp-action="NewProject" id="newBtn"><img
+                src="https://img.icons8.com/flat_round/24/000000/plus.png"></a> </h1>
+    <div class="card-container">
+        <div class="table">
+
+        </div>
+        <div class="table-body">
+
+            <div class="row">
+                @foreach(var p in @ViewBag.Projects){
+                <div class="table-cell">
+
+                    <div class="card">
+                        <div class="card-input-group">
+                            <a asp-action="ViewProject" id="editBtn" asp-route-projectId="@p.ProjectID"><img
+                                    src="https://img.icons8.com/material-two-tone/24/000000/pencil.png"></a>
+                            @if(@ViewBag.UserId == @p.ProjectCreatorUserId)
+                            {
+                            <a asp-action="DeleteProject" id="delBtn" asp-route-projectId="@p.ProjectID"><img
+                                    src="https://img.icons8.com/material-rounded/24/000000/delete-trash.png"></a>
+                            }
+
+                        </div>
+                        <h3 class="card-title">@p.ProjectName</h3>
+                        <h2 class="project-creator">Created By: @p.ProjectCreator.Email</h2>
+                        <h2 class="project-status">Status: @p.ProjectStatus</h2>
+                        <h2 class="project-duedate">Due: @p.DueDate.ToString("d")</h2>
+                        <h3 class="project-tasks"># of Tasks - @ViewBag.Tasks.Count | # of SubTasks - @ViewBag.SubTasks.Count</h3>
+                        <div class="hr"></div>
+                        <div class="card-body">
+                            <div class="card-desc">@p.ProjectDescription</div>
+                        </div>
+
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>

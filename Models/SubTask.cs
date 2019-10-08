@@ -28,8 +28,19 @@ namespace TaskLog.Models
         [Display(Name="Estimated Time")]
         public int EstimatedTime { get; set; }
 
+        // Check for inner SubTasks
+        public bool hasInnerSubTasks { get; set; }
+
+        // Task Info
         public int? ParentTaskId { get; set; }
         public Task ParentTask { get; set; }
+
+        // User Info
+        public int? SubTaskCreatorUserId { get; set; }
+        public User SubTaskCreator { get; set; }
+
+        // SubTask's SubTasks
+        public List<SubTask> SubTasks = new List<SubTask> ();
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
